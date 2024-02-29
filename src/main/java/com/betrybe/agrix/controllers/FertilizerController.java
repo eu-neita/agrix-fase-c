@@ -6,6 +6,7 @@ import com.betrybe.agrix.services.FertilizerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -44,6 +45,7 @@ public class FertilizerController {
    * getAll fertilizers.
    */
   @GetMapping()
+  @Secured({"ROLE_ADMIN"})
   public ResponseEntity<Iterable<FertilizerDto>> getAll() {
     return ResponseEntity.ok(FertilizerDto.toListDto(fertilizerService.getAll()));
   }
