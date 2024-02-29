@@ -5,6 +5,7 @@ import com.betrybe.agrix.exeption.PersonNotFoundException;
 import com.betrybe.agrix.models.repositories.PersonRepository;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 /**
@@ -51,6 +52,8 @@ public class PersonService {
    * Creates a new person.
    */
   public Person create(Person person) {
+    person.setPassword(new BCryptPasswordEncoder()
+        .encode(person.getPassword()));
     return personRepository.save(person);
   }
 }
